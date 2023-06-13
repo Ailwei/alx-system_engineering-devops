@@ -1,2 +1,2 @@
 #!/bin/bash
-typeset -p > env > typeset -f
+set
