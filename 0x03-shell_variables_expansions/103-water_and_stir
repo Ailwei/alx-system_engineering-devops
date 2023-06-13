@@ -1,0 +1,2 @@
+#!/bin/bash
+printf "bestchol%05d\n" "$(( $(tr 'water' '01234' <<< "$WATER") + $(tr 'stir' '01234' <<< "$STIR") ))"
