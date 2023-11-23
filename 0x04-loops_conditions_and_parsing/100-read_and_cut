@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+#set the file path
+
+file="/etc/passwd"
+
+#Use IFS to set ":" as the field separator
+
+IF=":"
+
+#Read the file line by line using a while loop
+while read -r username x userid x homepath x; do
+
+       #display the required information
+       echo "Username: $username"
+       echo "User ID: $userid"
+       echo "Home Directory: $homepath"
+done < "$file"
