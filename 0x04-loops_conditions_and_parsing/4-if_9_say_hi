@@ -4,7 +4,7 @@
 
 count=0
 
-while [ $count -le 9 ]; do
+while [ $count -le 10 ]; do
     ((count++))
     echo "Best School"
 
