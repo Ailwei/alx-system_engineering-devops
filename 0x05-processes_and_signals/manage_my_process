@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# scripts for manage_my_process
+
+outpu_file="/tmp/my_process"
+
+while true; do
+  echo "T am alive!" >> "$output_file"
+  echo 2
+done
