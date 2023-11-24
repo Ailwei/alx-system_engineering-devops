@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Run the infinite loop script in the background
+
+./4-to_infinity_and_beyond &
+
+# Save the PID of the background process
+bg_process_pid=$!
+
+# Wait for a moment (you can adjust the sleep duration)
+sleep 5
+
+# Send a signal to stop the background process
+# In this case, using SIGINT (Ctrl+C equivalent)
+kill -2 "$bg_process_pid"
+
+# Optionally, wait for the process to finish
+wait "$bg_process_pid"
