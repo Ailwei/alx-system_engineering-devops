@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Get the script's PIDi
+
+script_pid=$$
+
+# Find all processes with "bash" in their name
+for pid in /proc/[0-9]*/status; do
+  name=$(awk '/Name:/ {print $2}' "$pid")
+  current_pid=$(awk '/Pid:/ {print $2}' "$pid")
+
+  # Exclude the script's own PID
+  if [ "$current_pid" != "$script_pid" ] && [ "$name" == "bash" ]; then
+    echo "$current_pid $name"
+  fi
+done
