@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # This script displays a list of currently running processes.
+# shellcheck disable=SC200
 
 echo "PID   PPID   STAT   COMMAND"
 
