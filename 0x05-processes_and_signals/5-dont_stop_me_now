@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# run the infinite loop in the background
+./4-to_infinity_and_beyond &
+
+bg_process_pid=$!
+sleep 5
+
+kill "$bg_process_pid"
