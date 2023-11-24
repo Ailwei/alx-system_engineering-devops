@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# This script displays a list of currently running processes.
+
+# Display headers
+echo "PID   PPID   STAT   COMMAND"
+
+# Use ps command to display processes
+ps aux --forest
