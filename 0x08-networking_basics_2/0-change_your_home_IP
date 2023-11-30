@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Backup the original hosts file
+sudo cp /etc/hosts /etc/hosts.bak
+
+# Change localhost resolution to 127.0.0.2
+sudo sed -i 's/127.0.0.1\slocalhost/127.0.0.2 localhost/' /etc/hosts
+
+# Change facebook.com resolution to 8.8.8.8
+sudo sed -i 's/^[0-9.]*\sfacebook.com/8.8.8.8 facebook.com/' /etc/hosts
+
+echo "Hosts file updated successfully."
+
+# Restart networking service to apply changes
+sudo service networking restart
