@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
 # Backup the original hosts file
+
 sudo cp /etc/hosts /etc/hosts.bak
 
 # Change localhost resolution to 127.0.0.2
