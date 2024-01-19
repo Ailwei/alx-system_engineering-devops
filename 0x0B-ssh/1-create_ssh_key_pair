@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Bash script to create an RSA key pair
+# Set the name of the private key
+
+ssh-keygen -t rsa -b 4096 -P betty -f school
