@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # Bash script to connect to a servere using private key
 # set the server IP address or hostname
