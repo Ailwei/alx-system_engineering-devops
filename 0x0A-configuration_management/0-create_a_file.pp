@@ -1,3 +1,4 @@
+#!/usr/bin/pup
 # File: 0-create_a_file.pp
 
 file { '/tmp/school':
