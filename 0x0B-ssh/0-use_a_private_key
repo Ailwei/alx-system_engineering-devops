@@ -3,4 +3,4 @@
 # Bash script to connect to a servere using private key
 # set the server IP address or hostname
 
-ssh ubuntu@54.88.251.127 -i ~/.ssh/school
+ssh -i ~/.ssh/school ubuntu@54.88.251.127
