@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# A bash script that configures Nginx on an Ubuntu machine to have a custom 404 page.
+
+# Assuming you already have the Nginx installation and redirection script (3-redirection.sh)
+# Save the content of the redirection script into a variable
+redirection_script=$(cat 3-redirection.sh)
+
+# Save the content of the custom 404 configuration script into a variable
+custom_404_configuration=$(cat <<EOL
+# Configure custom 404 page
+error_page 404 /404.html;
+
+location = /404.html {
+    root /var/www/html;
+    internal;
+    return 404 '<html><head><title>404 Not Found</title></head><body><h1>Ceci n'est pas une page</h1></body></html>';
+}
+EOL
+)
+
+# Combine the redirection script and custom 404 configuration
+combined_script="${redirection_script}${custom_404_configuration}"
+
+# Save the combined script to a new file (4-not_found_page_404.sh)
+echo "$combined_script" > 4-not_found_page_404.sh
+
+# Make the script executable
+chmod +x 4-not_found_page_404.sh
+
+# Execute the script to install Nginx, configure the redirection, and set up the custom 404 page
+./4-not_found_page_404.sh
