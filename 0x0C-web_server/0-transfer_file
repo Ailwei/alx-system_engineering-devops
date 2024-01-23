@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# A Bash script to transfer file from a client to a server.
+# Using the scp linux command, we're taking  the following arguments
+# PATH_TO_FILE to be copied to server, USER on server IP of server
+# LOCATION to copy to on server and PATH_TO_IDENTITY_FILE for user auth
+
+if [ "$#" -lt 4 ]; then
+    echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+    exit 1
+fi
+
+FILE_PATH="$1"
+SERVER_IP="$2"
+USERNAME="$3"
+SSH_KEY_PATH="$4"
+
+# Use the full path to the private key file
+FULL_SSH_KEY_PATH="/vagrant/$SSH_KEY_PATH"
+
+if [ ! -f "$FULL_SSH_KEY_PATH" ]; then
+    echo "Error: SSH private key not found at $FULL_SSH_KEY_PATH"
+    exit 1
+fi
+
+scp -o StrictHostKeyChecking=no -i "$FULL_SSH_KEY_PATH" "$FILE_PATH" "$USERNAME@$SERVER_IP":~/
