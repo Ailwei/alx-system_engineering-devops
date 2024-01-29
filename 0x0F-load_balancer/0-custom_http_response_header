@@ -1,0 +1,17 @@
+#!/bin/env bash
+# update the package repo
+sudo apt update
+
+# Install ginx if no already installed
+sudo apt install -y nginx
+
+# define the custom http header configuration
+custom_header_config="add_header X-Server-By \$hostname;"
+
+# Configuration Ngix with the custom header
+sudo bash -c "echo '$custom_header_config' > /etc/nginx/conf.d/custom_header.conf'
+
+# Restart Ngix to apply the changes
+sudo systemctl restart nginx
+
+# echo "Web server configuration completed. Custom header added: X-Served-BY"
