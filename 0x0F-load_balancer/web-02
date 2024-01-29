@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# server web-01 logins details
+
+# ssh agent
+eval $("ssh-agent")
+
+# path to identfyfile
+ssh-add ~/.ssh/id_rsa
+
+# useranme ip address
+ssh -i /root/.ssh/id_rsa ubuntu@54.86.197.249
+~                        
