@@ -1,53 +1,50 @@
 # 0x0F. Load Balancer
 
-## Project Overview
+## Backend Configuration
 
-This project involves the configuration and deployment of a load balancer to enhance the performance and reliability of a web application. The load balancer will distribute incoming traffic across multiple web servers to optimize resource utilization and maintain high availability.
+### Project Details
 
-## Project Details
-
-- **Domain:** DevOps, Load Balancing
-- **Author:** [Your Name]
+- **Domain:** DevOps, SysAdmin
+- **Author:** Sylvain Kalache, co-founder at Holberton School
 - **Weight:** 1
-- **Start Date:** [Start Date]
-- **End Date:** [End Date]
-- **Checker Release Date:** [Checker Release Date]
-- **Auto Review Deadline:** [Auto Review Deadline]
+- **Start Date:** Jan 29, 2024 6:00 AM
+- **End Date:** Jan 30, 2024 6:00 AM
+- **Checker Release:** Jan 29, 2024 12:00 PM
+- **Auto Review Deadline:** Jan 30, 2024 6:00 AM
 
-## Concepts
+### Concepts
 
-This project covers the following key concepts:
+This project focuses on the following concepts:
 
-- Load Balancing
-- High Availability
-- Web Server Configuration
-- Network Basics
+- Load balancer
+- Web stack debugging
 
-## Requirements
+### Background Context
 
-### General
+Two additional servers have been provided:
+
+- `gc-[STUDENT_ID]-web-02-XXXXXXXXXX`
+- `gc-[STUDENT_ID]-lb-01-XXXXXXXXXX`
+
+The objective is to enhance the web stack for redundancy, enabling the infrastructure to handle more traffic by doubling the number of web servers. This ensures reliability, even if one web server fails.
+
+### Resources
+
+Read or watch:
+
+- [Introduction to load-balancing and HAproxy](https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts)
+- [HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+- [Debian/Ubuntu HAProxy packages](http://www.haproxy.org/download/2.0/doc/debpacking.html)
+
+### Requirements
+
+#### General
 
 - **Allowed Editors:** vi, vim, emacs
-- **Interpreted On:** Ubuntu 20.04 LTS
+- **Interpreted On:** Ubuntu 16.04 LTS
 - **File Ending:** All files should end with a new line
 - **Mandatory File:** README.md file at the root of the project folder
 - **Bash Scripts:** All Bash script files must be executable
-- **Shellcheck:** Bash scripts must pass Shellcheck without any error
-- **Error-Free Execution:** Bash scripts must run without error
+- **Shellcheck:** Bash scripts must pass Shellcheck (version 0.3.7) without any error
 - **Shebang:** The first line of all Bash scripts should be exactly `#!/usr/bin/env bash`
-- **Comments:** The second line of all Bash scripts should be a comment explaining the script's purpose
-- **No wget:** Not allowed to use wget
-
-### Load Balancer Configuration
-
-- **Nginx Configuration:** Configure Nginx on the load balancer to distribute traffic.
-- **Custom HTTP Header:** Add a custom HTTP header (`X-Served-By`) to identify the responding web server.
-
-### Network
-
-- **Network Basics:** Understand and implement network configurations for load balancing.
-
-## Submission
-
-Submit your project by [End Date] to meet the project requirements. Include a comprehensive README.md file documenting the load balancer setup, configurations, and any additional information.
-
+- **Comments:** The second line of all Bash scripts should be a comment explaining what is the script doing
