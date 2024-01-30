@@ -1,23 +1,36 @@
 #!/usr/bin/env bash
-# Install Ningx if not already installed
-sudo apt-get update
-sudo apt-get install -y nginx
 
-# Nginx configuration file path
-nginx_conf="/etc/nginx/sites-available/default"
+# Exit on errors
+set -e
 
-# Add the custom header configuration
-sudo tee -a "$nginx_conf" > /dev/null <<EOL
+# Update package list and installing nginx
+apt-get update -y
+apt-get install -y nginx
 
-# Custom header configuration
-server {
-    # ... other server configurations ...
+# Add custom response header to know the server name for debugging
+HOST_NAME=$(hostname)
+HEADER="\\\n\tadd_header X-Served-By $HOST_NAME;\n"
+if ! grep -q "X-Served-By" /etc/nginx/sites-available/default; then
+    sed -i "/server_name _;/a $HEADER" /etc/nginx/sites-available/default
+fi
 
-    # Add the custom header
-    add_header X-Served-By \$hostname;
+# Create a first index.html page
+echo "Hello World!" > /var/www/html/index.html
 
-}
-EOL
+# Add redirection to another page
+if ! grep -q "location /redirect_me" /etc/nginx/sites-available/default; then
+    echo -e "\n\tlocation /redirect_me {" >> /etc/nginx/sites-available/default
+    echo -e "\t\treturn 301 https://www.twitter.com/explore" >> /etc/nginx/sites-available/default
+    echo -e "\t}\n" >> /etc/nginx/sites-available/default
+fi
+
+# Add error page for 404
+if ! grep -q "error_page 404" /etc/nginx/sites-available/default; then
+    echo -e "\n\terror_page 404 /custom_404.html;" >> /etc/nginx/sites-available/default
+    echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+fi
 
 # Restart Nginx to apply changes
-sudo systemctl restart nginx
+service nginx restart
+
+echo "Nginx configuration completed successfully."
