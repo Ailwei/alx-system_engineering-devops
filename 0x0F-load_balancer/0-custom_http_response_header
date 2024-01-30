@@ -1,36 +1,32 @@
 #!/usr/bin/env bash
-
-# Exit on errors
-set -e
-
-# Update package list and installing nginx
-apt-get update -y
-apt-get install -y nginx
+# Install nginx on web-01 server
+sudo apt-get -y update
+sudo apt-get -y install nginx
 
 # Add custom response header to know the server name for debugging
 HOST_NAME=$(hostname)
 HEADER="\\\n\tadd_header X-Served-By $HOST_NAME;\n"
-if ! grep -q "X-Served-By" /etc/nginx/sites-available/default; then
-    sed -i "/server_name _;/a $HEADER" /etc/nginx/sites-available/default
+FIND=$(grep "X-Server-by" /etc/nginx/sites-available/default)
+if [[ -z $FIND ]]; then
+    sudo sed -i "23i $HEADER" /etc/nginx/sites-available/default
 fi
 
 # Create a first index.html page
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
-# Add redirection to another page
-if ! grep -q "location /redirect_me" /etc/nginx/sites-available/default; then
-    echo -e "\n\tlocation /redirect_me {" >> /etc/nginx/sites-available/default
-    echo -e "\t\treturn 301 https://www.twitter.com/explore" >> /etc/nginx/sites-available/default
-    echo -e "\t}\n" >> /etc/nginx/sites-available/default
+# Add to the nginx configuration file a redirection to another page
+FIND=$(grep "redirect_me" /etc/nginx/sites-available/default)
+STRING="\\\n\tlocation /redirect_me {\n\t\t return 301 https://www.youtube.com/watch?v=3MbaGJN2ioQ;\n\t}\n"
+if [[ -z $FIND ]]; then
+    sudo sed -i "42i $STRING" /etc/nginx/sites-available/default
 fi
 
-# Add error page for 404
-if ! grep -q "error_page 404" /etc/nginx/sites-available/default; then
-    echo -e "\n\terror_page 404 /custom_404.html;" >> /etc/nginx/sites-available/default
-    echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+# Add to the nginx configuration file an error page 404
+FIND=$(grep "error_page 404" /etc/nginx/sites-available/default)
+ERROR="\\\n\terror_page 404 /custom_404.html;\n"
+if [[ -z $FIND ]]; then
+    echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
+    sudo sed -i "40i $ERROR" /etc/nginx/sites-available/default
 fi
 
-# Restart Nginx to apply changes
-service nginx restart
-
-echo "Nginx configuration completed successfully."
+sudo service nginx restart
