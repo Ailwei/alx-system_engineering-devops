@@ -1,20 +1,19 @@
-# 2-puppet_custom_http_response_header
+# File: 2-puppet_custom_http_response_header.pp
 
 # Install Nginx
-class { 'nginx':
-  manage_repo => true,
+class {'nginx': }
+
+# Define custom HTTP response header
+file { '/etc/nginx/conf.d/custom_headers.conf':
+  ensure  => present,
+  content => "add_header X-Served-By $hostname;\n",
+  require => Class['nginx'],
+  notify  => Service['nginx'],
 }
 
-# Define Nginx vhost configuration with custom HTTP header
-nginx::resource::vhost { 'default':
-  listen_port => 80,
-  proxy       => 'http://127.0.0.1:8080',
-  server_name => '_',
-  header      => ['X-Served-By $hostname'],
-}
-
-# Notify Nginx service to restart when the configuration changes
-notify { 'Reload Nginx':
-  subscribe => Nginx::Resource::Vhost['default'],
-  exec      => '/usr/sbin/service nginx reload',
+# Restart Nginx to apply changes
+service { 'nginx':
+  ensure    => running,
+  enable    => true,
+  subscribe => File['/etc/nginx/conf.d/custom_headers.conf'],
 }
