@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# ADD 'LISTEN 80' TO Nginx configuration
-sudo sed -i '/^http {/a \    listen 80' "$nginx_conf"
-# Restart Nginx
+# Open the 80 port
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 sudo service nginx restart
