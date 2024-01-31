@@ -1,24 +1,5 @@
 #!/usr/bin/env bash
-# configure Nginx to listen on port 80
-sudo apt-get update
-sudo apt-get install -y net-tools
-
-# check if Nginx is already listening to p[port 80
-if netstat -tuln | grep -q ':80'
-then
-    echo "Nginx is already listening on port 80."
-else
-    # check Nginx configuration file
-    nginx_conf="/etc/nginx/nginx.conf"
-    if [ -f "$nginx_conf" ]
-    then
-        # ADD 'LISTEN 80' TO Nginx configuration
-        sudo sed -i '/^http {/a \    listen 80' "$nginx_conf"
-        # Restart Nginx
-        sudo service nginx restart
-        
-        echo "Nginx configured to listen on port 80."
-    else
-        echo "Nginx configurstion file not found at $nginx_conf." 
-    fi
-fi
+# ADD 'LISTEN 80' TO Nginx configuration
+sudo sed -i '/^http {/a \    listen 80' "$nginx_conf"
+# Restart Nginx
+sudo service nginx restart
