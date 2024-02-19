@@ -36,11 +36,11 @@ def main():
         for task in tasks:
             file.write(
                     '"{}","{}","{}","{}"\n'.format(
-                    employee_id,
-                    username,
-                    task.get('completed'),
-                    task.get('title')
-                    )
+                        employee_id,
+                        username,
+                        task.get('completed'),
+                        task.get('title')
+                        )
                     )
 
 
