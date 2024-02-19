@@ -8,19 +8,17 @@ import csv
 import requests
 import sys
 
-
 if __name__ == "__main__":
     if len(sys.argv) != 2 or not sys.argv[1].isdigit():
         print("Usage: python script.py <employee_id>")
         sys.exit(1)
 
     employee_id = int(sys.argv[1])
+    base_url = 'https://jsonplaceholder.typicode.com/'
 
     # Fetch user data
-    user_response = requests.get(
-            'https://jsonplaceholder.typicode.com/users/{}'
-            .format(employee_id)
-            )
+    user_url = '{}users/{}'.format(base_url, employee_id)
+    user_response = requests.get(user_url)
     if user_response.status_code != 200:
         print("Error: Unable to fetch user data")
         sys.exit(1)
@@ -28,45 +26,24 @@ if __name__ == "__main__":
     employee_name = user_data.get('name')
 
     # Fetch TODO list data
-    todo_response = requests.get(
-            'https://jsonplaceholder.typicode.com/todos?userId={}'
-            .format(employee_id)
-            )
+    todo_url = '{}todos?userId={}'.format(base_url, employee_id)
+    todo_response = requests.get(todo_url)
     if todo_response.status_code != 200:
         print("Error: Unable to fetch TODO list data")
         sys.exit(1)
     todo_data = todo_response.json()
 
-    # Process TODO list progress
-    total_tasks = len(todo_data)
-    completed_tasks = sum(1 for task in todo_data if task['completed'])
-    done_tasks = [task['title'] for task in todo_data if task['completed']]
-
-    # Display progress
-    print("Employee {} is done with tasks({}/{}):"
-          .format(employee_name, completed_tasks, total_tasks))
-    for task in done_tasks:
-        print("\t", task)
-
-    # Export data to csv file
+    # Export data to CSV file
     csv_filename = '{}.csv'.format(employee_id)
-    with open(csv_filename, mode='w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file)
-        csv_writer.writerow([
-            'USER_ID',
-            'USERNAME',
-            'TASK_COMPLETED_STATUS',
-            'TASK_TITLE'
-            ]
-            )
-
+    with open(csv_filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
         for task in todo_data:
-            csv_writer.writerow([
+            writer.writerow([
                 employee_id,
                 employee_name,
-                task['completed'],
+                '{}'.format(task['completed']),
                 task['title']
-                ]
-                )
-
+            ])
+    
     print("Data exported to:", csv_filename)
