@@ -2,18 +2,6 @@
 """
 Python script that retrieves information about an employee's TODO list progress
 using a REST API.
-
-Requirements:
-- The script must accept an integer as a parameter, which is the employee ID.
-- Script must display on the standard output the employee TODO list progress
-  in the following format:
-    - First line: "Employee EMPLOYEE_NAME is done with taskS"
-      - EMPLOYEE_NAME: name of the employee
-      - NUMBER_OF_DONE_TASKS: number of completed tasks
-      - TOTAL_NUMBER_OF_TASKS: total number of tasks,
-      which is the sum of completed and non-completed tasks
-    - Second and N next lines display the title of completed tasks:
-    "TASK_TITLE"
 """
 
 import requests
