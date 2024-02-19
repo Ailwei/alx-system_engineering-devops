@@ -34,13 +34,14 @@ def main():
     # Write to CSV file
     with open('{}.csv'.format(employee_id), 'w') as file:
         for task in tasks:
-            file.write('"{}","{}","{}","{}"\n'.format(
-                employee_id,
-                username,
-                task.get('completed'),
-                task.get('title')
-            )
-        )
+            file.write(
+                    '"{}","{}","{}","{}"\n'.format(
+                    employee_id,
+                    username,
+                    task.get('completed'),
+                    task.get('title')
+                    )
+                    )
 
 
 if __name__ == "__main__":
