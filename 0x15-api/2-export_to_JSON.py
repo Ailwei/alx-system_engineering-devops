@@ -18,7 +18,10 @@ if __name__ == '__main__':
     response = requests.get(todo_url)
     tasks = response.json()
 
-    user_tasks = [{"task": task.get('title'), "completed": task.get('completed'), "username": username} for task in tasks]
+    user_tasks = [
+            {"task": task.get('title'),
+                "completed": task.get('completed'),
+                "username": username} for task in tasks]
 
     with open(f'{employee_id}.json', 'w') as file:
         json.dump({employee_id: user_tasks}, file, indent=4)
