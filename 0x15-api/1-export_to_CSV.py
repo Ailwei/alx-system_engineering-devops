@@ -35,7 +35,7 @@ if __name__ == "__main__":
     if todo_response.status_code != 200:
         print("Error: Unable to fetch TODO list data")
         sys.exit(1)
-        todo_data = todo_response.json()
+    todo_data = todo_response.json()
 
     # Process TODO list progress
     total_tasks = len(todo_data)
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         print("\t", task)
 
     # Export data to csv file
-    csv_filename = '{}.csv'.format(employeed_id)
+    csv_filename = '{}.csv'.format(employee_id)
     with open(csv_filename, mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow([
