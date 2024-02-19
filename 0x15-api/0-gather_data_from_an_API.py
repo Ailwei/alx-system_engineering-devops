@@ -42,7 +42,6 @@ if __name__ == "__main__":
 
     # Display progress
     print("Employee {} is done with tasks({}/{}):"
-            .format(employee_name, completed_tasks, total_tasks))
+        .format(employee_name, completed_tasks, total_tasks))
     for task in done_tasks:
         print("\t", task)
-
