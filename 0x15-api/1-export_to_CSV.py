@@ -38,7 +38,10 @@ def main():
                        .format(employee_id, username,
                         task.get('completed'),
                         task.get('title')
-                        ))
+                        
+                        )
+
+                    )
 
 
 if __name__ == "__main__":
