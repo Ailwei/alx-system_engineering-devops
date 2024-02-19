@@ -10,6 +10,9 @@ from collections import defalultdict
 
 
 def fetch_todo_data(employee_id):
+    """
+    fetch_todo_ data
+    """
     base_url = "https://jsonplaceholder.typicode.com/users"
     url = f"{base_url}/{employee_id}"
 
@@ -25,6 +28,9 @@ def fetch_todo_data(employee_id):
 
 
 def export_to_json(file):
+    """
+    export to json
+    """
     all_employees_data = defaultdict(list)
 
     for employee_id in range(1, 11):
