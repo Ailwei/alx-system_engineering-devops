@@ -8,6 +8,7 @@ import json
 import requests
 from collections import defalultdict
 
+
 def fetch_todo_data(employee_id):
     base_url = "https://jsonplaceholder.typicode.com/users"
     url = f"{base_url}/{employee_id}"
@@ -22,6 +23,7 @@ def fetch_todo_data(employee_id):
 
     return {"username": username, "tasks": tasks}
 
+
 def export_to_json(file):
     all_employees_data = defaultdict(list)
 
@@ -31,6 +33,7 @@ def export_to_json(file):
 
     with open(filename, 'w') as file:
         json.dump(all_employees_data, file, indent=4)
+
 
 if __name__ == '__main__':
     export_to_json('todo_all_employees.json')
