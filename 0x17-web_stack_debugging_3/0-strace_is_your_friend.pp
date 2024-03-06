@@ -1,3 +1,5 @@
+# Puppet manifest to fix Apache 500 Internal Server Error
+
 file { '/path/to/missing/file':
   ensure => file,
   owner  => 'apache',
