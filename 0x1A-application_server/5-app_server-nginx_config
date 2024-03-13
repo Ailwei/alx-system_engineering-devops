@@ -3,13 +3,13 @@ server {
     listen [::]:80 default_server;
 
     # Use IP of server as domain name
-    server_name 100.26.9.108
+    server_name 100.26.9.108;
 
     # Customize HTTP response header
-    add_header X-Served-By 454890-web-01
+    add_header X-Served-By 454890-web-01;
 
     # Serve /airbnb-onepage/ route on AirBnB_clone_v3
-    location = /airbnb-onepage/ {
+    location /airbnb-onepage/ {
         proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
     }
 
@@ -22,3 +22,21 @@ server {
     location /api/ {
         proxy_pass http://127.0.0.1:5002/;
     }
+
+    # Configure /2-hbnb route of AirBnB_clone_v4 as root location
+    location / {
+        proxy_pass http://127.0.0.1:5003/2-hbnb;
+    }
+
+    # Serve static content for AirBnB_clone_v4
+    location /static/ {
+        alias /path/to/your/web_dynamic/static/;
+    }
+
+    # Error pages
+    error_page 404 /404.html;
+    location = /404.html {
+        root /var/www/html;
+        internal;
+    }
+}
