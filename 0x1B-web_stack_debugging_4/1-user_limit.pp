@@ -5,7 +5,7 @@ exec { 'fix_limit_hbton_user':
   path    => '/usr/local/bin/:/bin/'
 }
 
-# Increase soft file limit hbton ser.
+# Increase soft file limit holberton user.
 exec { 'increase_soft_file':
   command => 'sed -i "/holberton soft/s/4/20000/" /etc/security/limits.conf',
   path    => '/usr/local/bin/:/bin/'
