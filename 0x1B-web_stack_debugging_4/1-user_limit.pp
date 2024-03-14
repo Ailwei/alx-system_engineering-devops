@@ -1,12 +1,12 @@
-# Ensure holberton user exists and adjust open files limit
+# fix limit file at hbton user.
 
-user { 'holberton':
-  ensure => present,
+exec { 'fix_limit_hbton_user':
+  command => 'sed -i "/holberton hard/s/5/10000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }
 
-# Adjusting open files limit for the holberton user
-exec { 'increase-holberton-open-files-limit':
-  command => 'echo "holberton hard nofile 10000" >> /etc/security/limits.conf && echo "holberton soft nofile 10000" >> /etc/security/limits.conf',
-  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-  unless  => 'grep -q "^holberton.*nofile.*10000" /etc/security/limits.conf',
+# Increase soft file limit hbton ser.
+exec { 'increase_soft_file':
+  command => 'sed -i "/holberton soft/s/4/20000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }
