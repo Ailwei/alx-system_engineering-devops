@@ -1,4 +1,5 @@
 # Ensure holberton user exists and adjust open files limit
+
 user { 'holberton':
   ensure => present,
 }
